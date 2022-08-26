@@ -1,5 +1,5 @@
 import numpy as np
-
+from tqdm import tqdm
 from ISR.utils.image_processing import (
     process_array,
     process_output,
@@ -37,7 +37,7 @@ class ImageModel:
                 lr_img, patch_size=by_patch_of_size, padding_size=padding_size
             )
             # return patches
-            for i in range(0, len(patches), batch_size):
+            for i in tqdm(range(0, len(patches), batch_size)):
                 batch = self.model.predict(patches[i: i + batch_size])
                 if i == 0:
                     collect = batch
